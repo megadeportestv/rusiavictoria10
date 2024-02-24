@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JWPlayer 7 custom error message</title>
+<script src="//ssl.p.jwpcdn.com/player/v/7.4.3/jwplayer.js"></script>
+<script>jwplayer.key="9p36CV6QmJmdYet7lLcp40o+0GE3J0gMCjTZwO9/mNM=";</script>
+</head>
+<style type="text/css">
+body {
+   margin: 0;
+   padding: 0;
+}
+</style>
+<body>
+<div id="wrapvideo">
+  <div id='player'></div> 
+</div>
+
+<script>
+// Función para obtener el valor de un parámetro GET desde la URL
+function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+var ghttp = new XMLHttpRequest();
+
+// Obtener el valor del parámetro 'get' de la URL
+var getParameter = getParameterByName('get');
+
+// Construir la URL con el parámetro GET obtenido dinámicamente
+var url = "https://kahsadfut92.000webhostapp.com/" + encodeURIComponent(getParameter) + ".json";
+
+ghttp.onreadystatechange = function() {
+    if (this.readyState == 4) {
+        if (this.status == 200) {
+            var jsonResponse = JSON.parse(ghttp.responseText);
+            var m3u8 = jsonResponse['url'];
+            setupPlayer(m3u8);
+        } else {
+            handleSetupError("Failed to fetch data from URL.");
+        }
+    }
+};
+
+ghttp.open("GET", url, true);
+ghttp.send();
+
+var playerInstance = jwplayer("player");
+
+function setupPlayer(m3u8) {
+    playerInstance.setup({
+        "title": "Mega Deportes TV | Reproductor",
+        "description": "megadeportestv2.com",
+        file: m3u8,
+        type: "hls",
+        withCredentials: true,
+        width: "100%",
+        height: "100%",
+        aspectratio: "16:9",
+        autostart: false,
+        cast: {}
+    });
+}
+
+function handleSetupError(errorMessage) {
+    var element = document.getElementById("wrapvideo");
+    element.innerHTML = "<p>Error: " + errorMessage + "</p>";
+}
+
+// Manejo de errores del reproductor
+playerInstance.on('error', function(evt) {
+    var element = document.getElementById("wrapvideo");
+    if (evt.message === "Error loading player: No playable sources found") {
+        element.innerHTML = "<p>Your message</p>";
+    } else {
+        element.innerHTML = "<p>Another message</p>";
+    }
+});
+
+playerInstance.on('setupError', function(evt) {
+    var element = document.getElementById("wrapvideo");
+    if (evt.message === "No suitable players found and fallback disabled") {
+        element.innerHTML = "<p>Your message on setup error</p>";
+    } else {
+        element.innerHTML = "<p>Another message on setup error</p>";
+    }
+});
+</script>
+
+</body>
+</html>
