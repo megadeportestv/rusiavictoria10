@@ -1,4 +1,3 @@
-
 <html lang="es">
 <head>
   <script type='text/javascript' src='//pl21088929.toprevenuegate.com/7d/3b/26/7d3b2636b068dd824d816fb68627e10f.js'></script>
@@ -66,7 +65,7 @@ jwplayer().on('play', function(e) {
 function tryInitialize() {
   initializePlayer(false); 
   playerInstance.on('error', function(e) {
-    if (e.code === 241401 || e.code === 241403) {
+    if (e.code === 241401 || e.code === 241403 || e.code === 241011) {
 
       setTimeout(tryInitialize, 1000);
     }
