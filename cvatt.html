@@ -65,7 +65,7 @@ jwplayer().on('play', function(e) {
 function tryInitialize() {
   initializePlayer(false); 
   playerInstance.on('error', function(e) {
-    if (e.code === 241401 || e.code === 241403 || e.code === 241011) {
+    if (e.code === 241401 || e.code === 241403 || e.code === 241011 || e.code === 241404) {
 
       setTimeout(tryInitialize, 1000);
     }
