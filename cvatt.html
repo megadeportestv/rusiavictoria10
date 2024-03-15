@@ -58,5 +58,47 @@ if (getLang == "") {
 jwplayer().on('play', function(e) {
   jwplayer().setCurrentAudioTrack(lang);
 });
+
+function tryInitialize() {
+  initializePlayer(false); 
+  playerInstance.on('error', function(e) {
+    if (e.code === 241401 || e.code === 241403 || e.code === 241011 || e.code === 241404) {
+
+      setTimeout(tryInitialize, 1000);
+    }
+  });
+}
+
+function checkAndInitialize(mtUrl) {
+  checkMtStatus(mtUrl, function(status) {
+    if (status === 200) {
+
+      initializePlayer(true);
+    } else {
+
+      setTimeout(function() {
+        random = Math.floor(Math.random() * mt.length);
+        checkAndInitialize(mt[random]);
+      }, 1000);
+    }
+  });
+}
+
+function checkMtStatus(mtUrl, callback) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        callback(200);
+      } else {
+        callback(xhr.status);
+      }
+    }
+  };
+  xhr.open('HEAD', mtUrl, true);
+  xhr.send();
+}
+
+tryInitialize();  
 </script>
 </html>
