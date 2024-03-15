@@ -16,7 +16,19 @@ var getURL = getParameterByName('get');
 var getIMG = getParameterByName('img');
 var getKEY  = getParameterByName('key');
 var getKEY2  = getParameterByName('key2');
-var getLang = getParameterByName('lang');	
+var getLang = getParameterByName('lang');
+
+console.log("getLang:", getLang); // Registro para verificar el valor de getLang
+
+var lang; // Definimos la variable lang aquí
+
+if (getLang == "") {
+    lang = 1;
+} else {
+    lang = parseInt(getLang); // Convertimos getLang a un entero
+}
+console.log("lang:", lang); // Registro para verificar el valor de lang
+
 </script>
 <script src="//ssl.p.jwpcdn.com/player/v/8.26.0/jwplayer.js"></script>
 <script> jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
@@ -52,13 +64,6 @@ function initializePlayer(autoplay) {
     sharing: {}
   });
 }
-
-console.log("getLang:", getLang); // Registrar el valor de getLang
-
-if (getLang == "") {
-    lang = 1;
-}
-console.log("lang:", lang); // Registrar el valor de lang
 
 playerInstance.on('ready', function() {
     console.log("Player ready");
