@@ -1,106 +1,106 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <script type='text/javascript' src='//pl21088929.toprevenuegate.com/7d/3b/26/7d3b2636b068dd824d816fb68627e10f.js'></script>
-</head>    
-<meta name=robots content=noindex />
-<style>body{margin:0;padding:0}</style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-function getParameterByName(name) {
-  name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
-  var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
-  results = regex.exec(location.search);
-  return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
-var getURL = getParameterByName('get');
-var getLang = getParameterByName('lang');
-var getIMG = getParameterByName('img');
-var getKEY  = getParameterByName('key');
-var getKEY2  = getParameterByName('key2');
-</script>
-<script src="//ssl.p.jwpcdn.com/player/v/8.26.0/jwplayer.js"></script>
-<script>
-var mt = ["//edge-live01-mun", "//edge-live01-bel", "//edge-vod04-sl", "//edge-vod06-sl", "//edge-vod01-hr", "//edge-vod03-hr", "//edge-vod04-hr", "//edge2-ccast-sl", "//edge7-ccast-sl", "//edge-live02-cen", "//edge-mix01-cte", "//edge-mix02-cte"];
-var playerInstance = jwplayer("player");
-
-function initializePlayer(autoplay) {
-  var random = Math.floor(Math.random() * mt.length);
-  playerInstance.setup({
-    playlist: [{
-      title : "REPRODUCTOR | Mega Deportes TV",
-      description: "megadeportestv2.com",
-      "sources": [
-        {
-          "default": false,
-          "type": "dash",
-          "file": mt[random] + atob(getURL), 
-          "drm": {
-            "clearkey": { "keyId": atob(getKEY), "key": atob(getKEY2)}
-          },
-          "label": "0"
-        }
-      ]
-    }],
-    width: "100%",
-    height: "100%",
-    aspectratio: "16:9",
-    autostart: autoplay, 
-    cast: {},
-    sharing: {}
-  });
-}
-
-if (getLang == "") {
-  var lang = 1;
-} else {
-  var lang = parseInt(getLang); 
-}
-
-playerInstance.on('play', function() {
-  playerInstance.setCurrentAudioTrack(lang);
-});
-
-function tryInitialize() {
-  initializePlayer(false); 
-  playerInstance.on('error', function(e) {
-    if (e.code === 241401 || e.code === 241403 || e.code === 241011 || e.code === 241404) {
-
-      setTimeout(tryInitialize, 1000);
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <style>body{margin:0;padding:0}</style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    function getParameterByName(name) {
+      name = name.replace(/[\[]/, "\[").replace(/[\]]/, "\]");
+      var regex = new RegExp("[\?&]" + name + "=([^&#]*)"),
+      results = regex.exec(location.search);
+      return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
     }
-  });
-}
+    var getURL = getParameterByName('get');
+    var getLang = getParameterByName('lang');
+    var getIMG = getParameterByName('img');
+    var getKEY  = getParameterByName('key');
+    var getKEY2  = getParameterByName('key2');
+  </script>
+  <script src="//ssl.p.jwpcdn.com/player/v/8.26.0/jwplayer.js"></script>
+</head>
+<body>
+  <div id="player"></div>
+  <script>
+    var mt = ["//edge-live01-mun", "//edge-live01-bel", "//edge-vod04-sl", "//edge-vod06-sl", "//edge-vod01-hr", "//edge-vod03-hr", "//edge-vod04-hr", "//edge2-ccast-sl", "//edge7-ccast-sl", "//edge-live02-cen", "//edge-mix01-cte", "//edge-mix02-cte"];
+    var playerInstance = jwplayer("player");
 
-function checkAndInitialize(mtUrl) {
-  checkMtStatus(mtUrl, function(status) {
-    if (status === 200) {
+    function initializePlayer(autoplay) {
+      var random = Math.floor(Math.random() * mt.length);
+      playerInstance.setup({
+        playlist: [{
+          title : "REPRODUCTOR | Mega Deportes TV",
+          description: "megadeportestv2.com",
+          "sources": [
+            {
+              "default": false,
+              "type": "dash",
+              "file": mt[random] + atob(getURL), 
+              "drm": {
+                "clearkey": { "keyId": atob(getKEY), "key": atob(getKEY2)}
+              },
+              "label": "0"
+            }
+          ]
+        }],
+        width: "100%",
+        height: "100%",
+        aspectratio: "16:9",
+        autostart: autoplay, 
+        cast: {},
+        sharing: {}
+      });
+    }
 
-      initializePlayer(true);
+    if (getLang == "") {
+      var lang = 1;
     } else {
-
-      setTimeout(function() {
-        random = Math.floor(Math.random() * mt.length);
-        checkAndInitialize(mt[random]);
-      }, 1000);
+      var lang = parseInt(getLang); 
     }
-  });
-}
 
-function checkMtStatus(mtUrl, callback) {
-  var xhr = new XMLHttpRequest();
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4) {
-      if (xhr.status === 200) {
-        callback(200);
-      } else {
-        callback(xhr.status);
-      }
+    playerInstance.on('play', function() {
+      playerInstance.setCurrentAudioTrack(lang);
+    });
+
+    function tryInitialize() {
+      initializePlayer(false); 
+      playerInstance.on('error', function(e) {
+        if (e.code === 241401 || e.code === 241403 || e.code === 241011 || e.code === 241404) {
+          setTimeout(tryInitialize, 1000);
+        }
+      });
     }
-  };
-  xhr.open('HEAD', mtUrl, true);
-  xhr.send();
-}
 
-tryInitialize();
-</script>
+    function checkAndInitialize(mtUrl) {
+      checkMtStatus(mtUrl, function(status) {
+        if (status === 200) {
+          initializePlayer(true);
+        } else {
+          setTimeout(function() {
+            random = Math.floor(Math.random() * mt.length);
+            checkAndInitialize(mt[random]);
+          }, 1000);
+        }
+      });
+    }
+
+    function checkMtStatus(mtUrl, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+          if (xhr.status === 200) {
+            callback(200);
+          } else {
+            callback(xhr.status);
+          }
+        }
+      };
+      xhr.open('HEAD', mtUrl, true);
+      xhr.send();
+    }
+
+    tryInitialize();
+  </script>
+</body>
 </html>
