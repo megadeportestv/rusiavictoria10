@@ -16,7 +16,7 @@ var getURL = getParameterByName('get');
 var getIMG = getParameterByName('img');
 var getKEY  = getParameterByName('key');
 var getKEY2  = getParameterByName('key2');
-var getLang = getParameterByName('lang');	
+var getLang = getParameterByName('lang');  
 </script>
 <script src="//ssl.p.jwpcdn.com/player/v/8.26.0/jwplayer.js"></script>
 <script> jwplayer.key = 'XSuP4qMl+9tK17QNb+4+th2Pm9AWgMO/cYH8CI0HGGr7bdjo';
@@ -51,18 +51,13 @@ function initializePlayer(autoplay) {
     cast: {},
     sharing: {}
   });
-}
 
-var lang;
-if (getLang == "") {
-  lang = 1;
-} else {
-  lang = parseInt(getLang); 
+  // Establecer el idioma después de inicializar el reproductor
+  if (getLang && getLang !== '1') {
+    var langIndex = parseInt(getLang); // Convertir lang a número
+    playerInstance.setCurrentAudioTrack({track: langIndex}); // Establecer el idioma
+  }
 }
-
-playerInstance.on('play', function() {
-  playerInstance.setCurrentAudioTrack(lang);
-});
 
 function tryInitialize() {
   initializePlayer(false); 
@@ -105,17 +100,5 @@ function checkMtStatus(mtUrl, callback) {
 }
 
 tryInitialize();
-
-// Agregar la lógica de redireccionamiento con el parámetro 'lang'
-if (getLang && getLang !== '1') { // Verifica si el parámetro lang existe y no es igual a 1 para evitar el bucle infinito
-    var redirectUrl = window.location.href;
-    if (redirectUrl.includes('?')) {
-        redirectUrl += '&lang=' + getLang;
-    } else {
-        redirectUrl += '?lang=' + getLang;
-    }
-    redirectUrl += '&start=true';
-    window.location = redirectUrl;
-}
 </script>
 </html>
