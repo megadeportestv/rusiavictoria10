@@ -74,6 +74,11 @@ playerInstance.on('play', function(e) {
   console.log("Current audio track:", playerInstance.getCurrentAudioTrack());
 });
 
+// Asegúrate de que el cambio de pista de audio esté funcionando correctamente
+playerInstance.on('audioTrackChanged', function(e) {
+  console.log("Audio track changed:", e.currentTrack);
+});
+
 function tryInitialize() {
   initializePlayer(false); 
   playerInstance.on('error', function(e) {
