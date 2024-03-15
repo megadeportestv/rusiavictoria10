@@ -106,8 +106,8 @@ function checkMtStatus(mtUrl, callback) {
 
 tryInitialize();
 
-// Aquí se agregará la lógica de redireccionamiento con el parámetro 'lang'
-if (getLang) {
+// Agregar la lógica de redireccionamiento con el parámetro 'lang'
+if (getLang && getLang !== '1') { // Verifica si el parámetro lang existe y no es igual a 1 para evitar el bucle infinito
     var redirectUrl = window.location.href;
     if (redirectUrl.includes('?')) {
         redirectUrl += '&lang=' + getLang;
