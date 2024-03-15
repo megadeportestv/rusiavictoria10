@@ -57,8 +57,8 @@ if (getLang == "") {
   var lang = parseInt(getLang); 
 }
 
-jwplayer().on('play', function(e) {
-  jwplayer().setCurrentAudioTrack(lang);
+playerInstance.on('play', function() {
+  playerInstance.setCurrentAudioTrack(lang);
 });
 
 function tryInitialize() {
