@@ -59,8 +59,11 @@ if (getLang == "") {
   var lang = parseInt(getLang); 
 }
 
+console.log("Valor de lang:", lang); // Verifica el valor de lang
+
 jwplayer().on('play', function(e) {
   jwplayer().setCurrentAudioTrack(lang);
+  console.log("Pista de audio actual:", lang); // Verifica la pista de audio actual
 });
 
 function tryInitialize() {
