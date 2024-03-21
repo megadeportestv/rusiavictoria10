@@ -49,16 +49,6 @@ playerInstance.setup({
     sharing: {}
 });
 
-if (getLang == "") {
-    var lang = 1;
-} else {
-    var lang = parseInt(getLang); 
-}
-
-jwplayer().on('play', function(e) {
-  jwplayer().setCurrentAudioTrack(lang);
-});
-
 function tryInitialize() {
   initializePlayer(false); 
   playerInstance.on('error', function(e) {
