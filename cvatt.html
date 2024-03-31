@@ -1,5 +1,6 @@
 <html lang="es">
 <head>
+  <script type='text/javascript' src='//pl21088929.toprevenuegate.com/7d/3b/26/7d3b2636b068dd824d816fb68627e10f.js'></script>
 </head>    
 <meta name=robots content=noindex />
 <style>body{margin:0;padding:0}</style>
@@ -22,31 +23,43 @@ var getKEY2  = getParameterByName('key2');
 <div id="player"></div>
 <script>
 var mt = ["//edge-live02-mun", "//edge-live01-bel", "//edge-live02-bel", "//edge-live11-hr", "//edge-live12-hr", "//edge-live13-hr", "//edge-live14-hr", "//edge-live15-hr", "//edge-live16-hr", "//edge-live17-hr", "//edge-live31-hr", "//edge-live32-hr", "//edge-live11-sl", "//edge-live12-sl", "//edge-live13-sl", "//edge-live15-sl", "//edge-live16-sl", "//edge-live17-sl", "//edge-live31-sl", "//edge-live32-sl", "//edge-vod02-sl", "//edge-vod04-sl", "//edge9-sl", "//edge10-sl"];
-var random = Math.floor(Math.random() * mt.length);
 var playerInstance = jwplayer("player");
 
-playerInstance.setup({
+function initializePlayer(autoplay) {
+  var random = Math.floor(Math.random() * mt.length);
+  playerInstance.setup({
     playlist: [{
       title : "REPRODUCTOR | Mega Deportes TV",
-      description: "https://megadeportestv2.com",
-        "sources": [
-            {
-                "default": false,
-                "type": "dash",
-                "file": mt[random] + atob(getURL), 
-                "drm": {
-                    "clearkey": { "keyId": atob(getKEY), "key": atob(getKEY2)}
-                },
-                "label": "0"
-            }
-        ]
+      description: "megadeportestv2.com",
+      "sources": [
+        {
+          "default": false,
+          "type": "dash",
+          "file": mt[random] + atob(getURL), 
+          "drm": {
+            "clearkey": { "keyId": atob(getKEY), "key": atob(getKEY2)}
+          },
+          "label": "0"
+        }
+      ]
     }],
     width: "100%",
     height: "100%",
     aspectratio: "16:9",
-    autostart: false,
+    autostart: autoplay, 
     cast: {},
     sharing: {}
+  });
+}
+
+if (getLang == "") {
+  var lang = 1;
+} else {
+  var lang = parseInt(getLang); 
+}
+
+jwplayer().on('play', function(e) {
+  jwplayer().setCurrentAudioTrack(lang);
 });
 
 function tryInitialize() {
@@ -89,6 +102,6 @@ function checkMtStatus(mtUrl, callback) {
   xhr.send();
 }
 
-tryInitialize();  
+tryInitialize();
 </script>
 </html>
