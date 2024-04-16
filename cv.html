@@ -34,14 +34,11 @@ var getLang = getParameterByName('lang');
 <div id="player"></div>
 <script>
 var playerInstance = jwplayer("player");
-
-// Manejo global de errores
+	
 playerInstance.on("error", function(event) {
     if (event.code === 241504) {
-        // Reiniciar la página para reiniciar el reproductor
         location.reload();
     } else {
-        // Agrega aquí la lógica de manejo de otros errores si lo deseas
         console.error("Error:", event.code, event.message);
     }
 });
