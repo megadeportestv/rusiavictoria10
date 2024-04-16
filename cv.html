@@ -33,14 +33,19 @@ var getLang = getParameterByName('lang');
 </script>
 <div id="player"></div>
 <script>
-        var playerInstance= jwplayer("player");
+<script>
+var playerInstance = jwplayer("player");
 
-        playerInstance.on("error", function(event) {
-            if (event.code === 241504) {
-                location.reload();
-            } else {
-            }
-        });
+// Manejo global de errores
+playerInstance.on("error", function(event) {
+    if (event.code === 241504) {
+        // Reiniciar la página para reiniciar el reproductor
+        location.reload();
+    } else {
+        // Agrega aquí la lógica de manejo de otros errores si lo deseas
+        console.error("Error:", event.code, event.message);
+    }
+});
 
 if (getURL == "QTNfQ2luZQ==" || getURL == "Rmxvd19NdXNpY19YUA==" || getURL == "QUVIRA==" || getURL == "SG9sYV9UVg==" || getURL == "QVhOSEQ=" || getURL == "TVRWMDA=" || getURL == "V2FybmVySEQ=" || getURL == "R0VOX1RW" || getURL == "Rm94X1Nwb3J0c19QcmVtaXVuX0hE" || getURL == "VHlDU3BvcnQ" || getURL == "V2FybmVySEQ=" || getURL == "RXZlbnRvc19IRF9VeQ")
     number = 7;
