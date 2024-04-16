@@ -33,7 +33,14 @@ var getLang = getParameterByName('lang');
 </script>
 <div id="player"></div>
 <script>
-var playerInstance= jwplayer("player");
+        var playerInstance= jwplayer("player");
+
+        playerInstance.on("error", function(event) {
+            if (event.code === 241504) {
+                location.reload();
+            } else {
+            }
+        });
 
 if (getURL == "QTNfQ2luZQ==" || getURL == "Rmxvd19NdXNpY19YUA==" || getURL == "QUVIRA==" || getURL == "SG9sYV9UVg==" || getURL == "QVhOSEQ=" || getURL == "TVRWMDA=" || getURL == "V2FybmVySEQ=" || getURL == "R0VOX1RW" || getURL == "Rm94X1Nwb3J0c19QcmVtaXVuX0hE" || getURL == "VHlDU3BvcnQ" || getURL == "V2FybmVySEQ=" || getURL == "RXZlbnRvc19IRF9VeQ")
     number = 7;
